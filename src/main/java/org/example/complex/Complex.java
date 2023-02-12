@@ -100,4 +100,9 @@ public class Complex {
 		Complex._div(ret, rhs);
 		return ret;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%.2f", this._real) + " + (" + String.format("%.2f", this._imag) + "i)";
+	}
 }
