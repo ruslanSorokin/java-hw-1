@@ -15,10 +15,6 @@ public abstract class AbstractMatrix {
 		this._nCol = nCol;
 	}
 
-	public AbstractMatrix(AbstractMatrix other) {
-		this(other._nRow, other._nCol);
-	}
-
 	public int getNRow() {
 		return this._nRow;
 	}
