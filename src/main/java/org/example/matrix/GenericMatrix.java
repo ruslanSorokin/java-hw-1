@@ -31,5 +31,5 @@ public abstract class GenericMatrix<T> extends AbstractMatrix {
 			throws PairwiseIncompatibleDimensionsException;
 
 	public abstract GenericMatrix<T> mul(GenericMatrix<T> other)
-			throws IncompatibleInnerDimensionsExceptions;
+			throws InternalIncompatibleDimensionsException;
 }

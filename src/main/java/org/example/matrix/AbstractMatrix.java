@@ -1,6 +1,6 @@
 package org.example.matrix;
 
-import org.example.matrix.exception.IncompatibleInnerDimensionsExceptions;
+import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
 import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 
@@ -25,9 +25,9 @@ public abstract class AbstractMatrix {
 	}
 
 	protected static void checkInternallyCompatibility(AbstractMatrix lhs, AbstractMatrix rhs)
-			throws IncompatibleInnerDimensionsExceptions {
+			throws InternalIncompatibleDimensionsException {
 		if (lhs._nCol != rhs.getNRow()) {
-			throw new IncompatibleInnerDimensionsExceptions(lhs, rhs);
+			throw new InternalIncompatibleDimensionsException(lhs, rhs);
 		}
 	}
 
