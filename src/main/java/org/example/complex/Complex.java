@@ -31,36 +31,43 @@ public class Complex {
 	}
 
 	public Complex add(Complex other) {
-		Complex.add(this, other);
+		Complex._add(this, other);
 		return this;
 	}
 
-	public Complex sub(Complex other) {
-		Complex.sub(this, other);
-		return this;
-	}
-
-	public Complex mul(Complex other) {
-		Complex.mul(this, other);
-		return this;
-	}
-
-	public Complex div(Complex other) {
-		Complex.div(this, other);
-		return this;
-	}
-
-	protected static void add(Complex lhs, Complex rhs) {
+	protected static void _add(Complex lhs, Complex rhs) {
 		lhs._real += rhs._real;
 		lhs._imag += rhs._imag;
 	}
 
-	protected static void sub(Complex lhs, Complex rhs) {
+	public static Complex add(Complex lhs, Complex rhs) {
+		var ret = new Complex(lhs);
+		Complex._add(ret, rhs);
+		return ret;
+	}
+
+	public Complex sub(Complex other) {
+		Complex._sub(this, other);
+		return this;
+	}
+
+	protected static void _sub(Complex lhs, Complex rhs) {
 		lhs._real -= rhs._real;
 		lhs._imag -= rhs._imag;
 	}
 
-	protected static void mul(Complex lhs, Complex rhs) {
+	public static Complex sub(Complex lhs, Complex rhs) {
+		var ret = new Complex(lhs);
+		Complex._sub(ret, rhs);
+		return ret;
+	}
+
+	public Complex mul(Complex other) {
+		Complex._mul(this, other);
+		return this;
+	}
+
+	protected static void _mul(Complex lhs, Complex rhs) {
 		var real = lhs._real * rhs._real - lhs._imag * rhs._imag;
 		var imag = lhs._real * rhs._imag + lhs._imag * rhs._real;
 
@@ -68,12 +75,29 @@ public class Complex {
 		lhs._imag = imag;
 	}
 
-	protected static void div(Complex lhs, Complex rhs) {
+	public static Complex mul(Complex lhs, Complex rhs) {
+		var ret = new Complex(lhs);
+		Complex._mul(ret, rhs);
+		return ret;
+	}
+
+	public Complex div(Complex other) {
+		Complex._div(this, other);
+		return this;
+	}
+
+	protected static void _div(Complex lhs, Complex rhs) {
 		var sqrtSum = rhs._real * rhs._real + rhs._imag * rhs._imag;
 		var real = (lhs._real * rhs._real + lhs._imag * rhs._imag) / sqrtSum;
 		var imag = (lhs._imag * rhs._real + lhs._real * rhs._imag) / sqrtSum;
 
 		lhs._real = real;
 		lhs._imag = imag;
+	}
+
+	public static Complex div(Complex lhs, Complex rhs) {
+		var ret = new Complex(lhs);
+		Complex._div(ret, rhs);
+		return ret;
 	}
 }
