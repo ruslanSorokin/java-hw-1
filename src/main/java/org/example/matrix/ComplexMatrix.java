@@ -17,7 +17,7 @@ public class ComplexMatrix
 	public ComplexMatrix(int nRow, int nCol, Complex val)
 			throws NegativeDimensionException {
 		this(nRow, nCol);
-		fill(val);
+		this.fill(val);
 	}
 
 	public ComplexMatrix(ComplexMatrix other) {
