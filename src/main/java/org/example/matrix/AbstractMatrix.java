@@ -6,9 +6,10 @@ public abstract class AbstractMatrix {
 	protected final int _nRow;
 	protected final int _nCol;
 
-	public AbstractMatrix(int nRow, int nCol) throws NegativeDimensionException {
+	public AbstractMatrix(int nRow, int nCol)
+			throws NegativeDimensionException {
 		if (nRow < 0 || nCol < 0) {
-			throw new NegativeDimensionException(nRow, nCol);
+			throw new NegativeDimensionException(this);
 		}
 		this._nRow = nRow;
 		this._nCol = nCol;
