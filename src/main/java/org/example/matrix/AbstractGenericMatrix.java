@@ -4,7 +4,8 @@ import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
 
-public abstract class AbstractGenericMatrix<T> extends AbstractMatrix {
+public abstract class AbstractGenericMatrix<T>
+		extends AbstractMatrix {
 	public T[][] data = null;
 
 	protected AbstractGenericMatrix(int nRow, int nCol)
@@ -16,6 +17,14 @@ public abstract class AbstractGenericMatrix<T> extends AbstractMatrix {
 		for (int i = 0; i < dst._nRow; ++i) {
 			for (int j = 0; j < dst._nCol; ++j) {
 				dst.data[i][j] = src.data[i][j];
+			}
+		}
+	}
+
+	protected void fill(T val) {
+		for (int i = 0; i < this._nRow; ++i) {
+			for (int j = 0; j < this._nCol; ++j) {
+				this.data[i][j] = val;
 			}
 		}
 	}
