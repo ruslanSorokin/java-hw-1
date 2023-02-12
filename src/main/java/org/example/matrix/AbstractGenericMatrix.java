@@ -31,10 +31,9 @@ public abstract class AbstractGenericMatrix<T>
 
 	private boolean isInBounds(int i, int j) {
 		if (i < 0 || i > this._nRow || j < 0 || j > this._nCol) {
-			return true;
-		}
-		return false;
+			return false;
 	}
+		return true;
 
 	public T get(int i, int j)
 			throws ArrayIndexOutOfBoundsException {
