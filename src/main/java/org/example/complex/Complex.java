@@ -1,8 +1,8 @@
 package org.example.complex;
 
 public class Complex {
-	private final double _real;
-	private final double _imag;
+	private double _real;
+	private double _imag;
 
 	public Complex() {
 		this._real = this._imag = 0;
@@ -31,24 +31,49 @@ public class Complex {
 	}
 
 	public Complex add(Complex other) {
-		return new Complex(this._real + other._real, this._imag + other._imag);
+		Complex.add(this, other);
+		return this;
 	}
 
 	public Complex sub(Complex other) {
-		return new Complex(this._real - other._real, this._imag - other._imag);
+		Complex.sub(this, other);
+		return this;
 	}
 
 	public Complex mul(Complex other) {
-		var real = this._real * other._real - this._imag * other._imag;
-		var imag = this._real * other._imag + this._imag * other._real;
-		return new Complex(real, imag);
+		Complex.mul(this, other);
+		return this;
 	}
 
 	public Complex div(Complex other) {
-		var sqrtSum = other._real * other._real + other._imag * other._imag;
-		var real = (this._real * other._real + this._imag * other._imag) / sqrtSum;
-		var imag = (this._imag * other._real + this._real * other._imag) / sqrtSum;
+		Complex.div(this, other);
+		return this;
+	}
 
-		return new Complex(real, imag);
+	protected static void add(Complex lhs, Complex rhs) {
+		lhs._real += rhs._real;
+		lhs._imag += rhs._imag;
+	}
+
+	protected static void sub(Complex lhs, Complex rhs) {
+		lhs._real -= rhs._real;
+		lhs._imag -= rhs._imag;
+	}
+
+	protected static void mul(Complex lhs, Complex rhs) {
+		var real = lhs._real * rhs._real - lhs._imag * rhs._imag;
+		var imag = lhs._real * rhs._imag + lhs._imag * rhs._real;
+
+		lhs._real = real;
+		lhs._imag = imag;
+	}
+
+	protected static void div(Complex lhs, Complex rhs) {
+		var sqrtSum = rhs._real * rhs._real + rhs._imag * rhs._imag;
+		var real = (lhs._real * rhs._real + lhs._imag * rhs._imag) / sqrtSum;
+		var imag = (lhs._imag * rhs._real + lhs._real * rhs._imag) / sqrtSum;
+
+		lhs._real = real;
+		lhs._imag = imag;
 	}
 }
