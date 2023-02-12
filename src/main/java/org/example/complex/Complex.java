@@ -26,7 +26,7 @@ public class Complex {
 		return this._real;
 	}
 
-	public double getImage() {
+	public double getImag() {
 		return this._imag;
 	}
 
