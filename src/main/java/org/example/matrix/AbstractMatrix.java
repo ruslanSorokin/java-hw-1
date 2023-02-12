@@ -24,7 +24,7 @@ public abstract class AbstractMatrix {
 		}
 	}
 
-	protected static void checkInternallyCompatibility(AbstractMatrix lhs, AbstractMatrix rhs)
+	protected static void checkInternalCompatibility(AbstractMatrix lhs, AbstractMatrix rhs)
 			throws InternalIncompatibleDimensionsException {
 		if (lhs._nCol != rhs.getNRow()) {
 			throw new InternalIncompatibleDimensionsException(lhs, rhs);
