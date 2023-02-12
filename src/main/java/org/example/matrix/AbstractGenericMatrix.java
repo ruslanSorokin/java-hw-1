@@ -70,4 +70,17 @@ public abstract class AbstractGenericMatrix<T>
 
 	public abstract AbstractGenericMatrix<T> mul(AbstractGenericMatrix<T> other)
 			throws InternalIncompatibleDimensionsException;
+
+	@Override
+	public String toString() {
+		var ret = new String();
+
+		for (int i = 0; i < this._nRow; ++i) {
+			for (int j = 0; j < this._nCol; ++j) {
+				ret += this.data[i][j] + "   ";
+			}
+			ret += '\n';
+		}
+		return ret;
+	}
 }
