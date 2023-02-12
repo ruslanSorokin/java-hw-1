@@ -35,7 +35,7 @@ public class Complex {
 		return this;
 	}
 
-	protected static void _add(Complex lhs, Complex rhs) {
+	private static void _add(Complex lhs, Complex rhs) {
 		lhs._real += rhs._real;
 		lhs._imag += rhs._imag;
 	}
@@ -51,7 +51,7 @@ public class Complex {
 		return this;
 	}
 
-	protected static void _sub(Complex lhs, Complex rhs) {
+	private static void _sub(Complex lhs, Complex rhs) {
 		lhs._real -= rhs._real;
 		lhs._imag -= rhs._imag;
 	}
@@ -67,7 +67,7 @@ public class Complex {
 		return this;
 	}
 
-	protected static void _mul(Complex lhs, Complex rhs) {
+	private static void _mul(Complex lhs, Complex rhs) {
 		var real = lhs._real * rhs._real - lhs._imag * rhs._imag;
 		var imag = lhs._real * rhs._imag + lhs._imag * rhs._real;
 
@@ -86,7 +86,7 @@ public class Complex {
 		return this;
 	}
 
-	protected static void _div(Complex lhs, Complex rhs) {
+	private static void _div(Complex lhs, Complex rhs) {
 		var sqrtSum = rhs._real * rhs._real + rhs._imag * rhs._imag;
 		var real = (lhs._real * rhs._real + lhs._imag * rhs._imag) / sqrtSum;
 		var imag = (lhs._imag * rhs._real + lhs._real * rhs._imag) / sqrtSum;
