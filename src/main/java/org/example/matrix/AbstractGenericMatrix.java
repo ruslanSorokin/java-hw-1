@@ -6,6 +6,9 @@ import org.example.matrix.exception.NegativeDimensionException;
 
 public abstract class AbstractGenericMatrix<T>
 		extends AbstractMatrix {
+	/*
+	 * Stores cells
+	 */
 	public T[][] data = null;
 
 	protected AbstractGenericMatrix(int nRow, int nCol)
@@ -13,6 +16,10 @@ public abstract class AbstractGenericMatrix<T>
 		super(nRow, nCol);
 	}
 
+	/**
+	 * @param src matrix from which elements will be copied
+	 * @param dst matrix into which elements will be copied
+	 */
 	protected void copy(AbstractGenericMatrix<T> src, AbstractGenericMatrix<T> dst) {
 		for (int i = 0; i < dst._nRow; ++i) {
 			for (int j = 0; j < dst._nCol; ++j) {
@@ -21,6 +28,9 @@ public abstract class AbstractGenericMatrix<T>
 		}
 	}
 
+	/**
+	 * @param val value which will be set
+	 */
 	protected void fill(T val) {
 		for (int i = 0; i < this._nRow; ++i) {
 			for (int j = 0; j < this._nCol; ++j) {
@@ -29,22 +39,46 @@ public abstract class AbstractGenericMatrix<T>
 		}
 	}
 
+	/**
+	 * @param i row index
+	 * @param j column index
+	 * @return boolean true if both indexes are in bounds
+	 *         otherwise return false
+	 */
 	private boolean isInBounds(int i, int j) {
 		if (i < 0 || i > this._nRow || j < 0 || j > this._nCol) {
 			return false;
-	}
+		}
 		return true;
+	}
 
+	/**
+	 * @param i row index
+	 * @param j column index
+	 * @return T
+	 * @throws ArrayIndexOutOfBoundsException if one of the indexes is out of bound
+	 */
 	public T get(int i, int j)
 			throws ArrayIndexOutOfBoundsException {
 		return this.data[i][j];
 	}
 
+	/**
+	 * @param val value which will be set
+	 * @param i   row index
+	 * @param j   column index
+	 * @throws ArrayIndexOutOfBoundsException if one of the indexes is out of bound
+	 */
 	public void set(T val, int i, int j)
 			throws ArrayIndexOutOfBoundsException {
 		this.data[i][j] = val;
 	}
 
+	/**
+	 * @param i row index
+	 * @param j column index
+	 * @return T
+	 */
 	public T getAt(int i, int j) {
 		if (!isInBounds(i, j)) {
 			return null;
@@ -53,6 +87,11 @@ public abstract class AbstractGenericMatrix<T>
 		return this.data[i][j];
 	}
 
+	/**
+	 * @param val value which will be set
+	 * @param i   row index
+	 * @param j   column index
+	 */
 	public void setAt(T val, int i, int j) {
 		if (!isInBounds(i, j)) {
 			return;
@@ -61,15 +100,33 @@ public abstract class AbstractGenericMatrix<T>
 		this.data[i][j] = val;
 	}
 
+	/**
+	 * @return AbstractGenericMatrix<T>
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
 	public abstract AbstractGenericMatrix<T> add(AbstractGenericMatrix<T> other)
 			throws PairwiseIncompatibleDimensionsException;
 
+	/**
+	 * @return AbstractGenericMatrix<T>
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
 	public abstract AbstractGenericMatrix<T> sub(AbstractGenericMatrix<T> other)
 			throws PairwiseIncompatibleDimensionsException;
 
+	/**
+	 * @return AbstractGenericMatrix<T>
+	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
+	 *                                                 compatible
+	 */
 	public abstract AbstractGenericMatrix<T> mul(AbstractGenericMatrix<T> other)
 			throws InternalIncompatibleDimensionsException;
 
+	/**
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		var ret = new String();
