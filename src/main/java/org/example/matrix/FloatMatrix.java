@@ -48,8 +48,10 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	}
 
 	/**
+	 * Assignment addition operation equals `this += other`
+	 *
 	 * @param other matrix which will be added to `this` matrix
-	 * @return new AbstractGenericMatrix<Double>
+	 * @return this matrix
 	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
 	 *                                                 compatible
 	 */
@@ -58,19 +60,19 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
 
-		var ret = new FloatMatrix(this._nRow, this._nCol);
-
 		for (int i = 0; i < this._nRow; ++i) {
 			for (int j = 0; j < this._nCol; ++j) {
-				ret.data[i][j] = this.data[i][j] + other.data[i][j];
+				this.data[i][j] = this.data[i][j] + other.data[i][j];
 			}
 		}
-		return ret;
+		return this;
 	}
 
 	/**
-	 * @param other matrix by which `this` matrix will be divided
-	 * @return new AbstractGenericMatrix<Double>
+	 * Assignment subtraction operation equals `this -= other`
+	 *
+	 * @param other matrix which will be subtracted from this matrix
+	 * @return this matrix
 	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
 	 *                                                 compatible
 	 */
@@ -78,38 +80,45 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	public AbstractGenericMatrix<Double> sub(AbstractGenericMatrix<Double> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
-
-		var ret = new FloatMatrix(this._nRow, this._nCol);
-
 		for (int i = 0; i < this._nRow; ++i) {
 			for (int j = 0; j < this._nCol; ++j) {
-				ret.data[i][j] = this.data[i][j] - other.data[i][j];
+				this.data[i][j] = this.data[i][j] - other.data[i][j];
 			}
 		}
-		return ret;
+		return this;
 	}
 
 	/**
+	 * Multiplication operation equals `this * other`
+	 *
 	 * @param other matrix by which `this` matrix will be multiplied
-	 * @return new AbstractGenericMatrix<Double>
+	 * @return new matrix
 	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
 	 *                                                 compatible
 	 */
-	@Override
-	public AbstractGenericMatrix<Double> mul(AbstractGenericMatrix<Double> other)
+	public AbstractGenericMatrix<Double> mul(
+			AbstractGenericMatrix<Double> lhs,
+			AbstractGenericMatrix<Double> rhs)
 			throws InternalIncompatibleDimensionsException {
-		AbstractMatrix.checkInternalCompatibility(this, other);
+		AbstractMatrix.checkInternalCompatibility(lhs, rhs);
+		var res = new FloatMatrix(lhs._nRow, rhs._nCol);
+		return _mul(lhs, rhs, res);
+	}
 
-		var ret = new FloatMatrix(this._nRow, other._nCol);
+	private static AbstractGenericMatrix<Double> _mul(
+			AbstractGenericMatrix<Double> lhs,
+			AbstractGenericMatrix<Double> rhs,
+			AbstractGenericMatrix<Double> res)
+			throws InternalIncompatibleDimensionsException {
 
-		for (int i = 0; i < this._nRow; i++) {
-			for (int j = 0; j < other._nCol; j++) {
-				for (int k = 0; k < other._nRow; k++) {
-					ret.data[i][j] += this.data[i][k] * other.data[k][j];
+		for (int i = 0; i < lhs._nRow; i++) {
+			for (int j = 0; j < rhs._nCol; j++) {
+				for (int k = 0; k < rhs._nRow; k++) {
+					res.data[i][j] += lhs.data[i][k] * rhs.data[k][j];
 				}
 			}
 		}
-		return ret;
+		return res;
 	}
 
 }

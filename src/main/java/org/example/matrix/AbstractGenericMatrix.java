@@ -116,13 +116,22 @@ public abstract class AbstractGenericMatrix<T>
 	public abstract AbstractGenericMatrix<T> sub(AbstractGenericMatrix<T> other)
 			throws PairwiseIncompatibleDimensionsException;
 
-	/**
-	 * @return AbstractGenericMatrix<T>
-	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
-	 *                                                 compatible
+	// /**
+	// * @return AbstractGenericMatrix<T>
+	// * @throws InternalIncompatibleDimensionsException if matrices are not
+	// internal
+	// * compatible
+	// */
+	// public abstract AbstractGenericMatrix<T> mul(
+	// AbstractGenericMatrix<T> lhs,
+	// AbstractGenericMatrix<T> rhs)
+	// throws InternalIncompatibleDimensionsException;
+	/*
+	 * TODO:
+	 * see https://stackoverflow.com/questions/370962/why-cant-static-methods-be-
+	 * abstract-in-java
+	 *
 	 */
-	public abstract AbstractGenericMatrix<T> mul(AbstractGenericMatrix<T> other)
-			throws InternalIncompatibleDimensionsException;
 
 	/**
 	 * @return String
