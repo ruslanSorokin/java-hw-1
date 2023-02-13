@@ -81,7 +81,7 @@ public class ComplexMatrix
 
 	/**
 	 * @param other matrix by which `this` matrix will be multiplied
-	 * @return new AbstractGenericMatrix<T>
+	 * @return new AbstractGenericMatrix<Complex>
 	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
 	 *                                                 compatible
 	 */
@@ -93,9 +93,9 @@ public class ComplexMatrix
 		var ret = new ComplexMatrix(this._nRow, other._nCol);
 
 		for (int i = 0; i < this._nRow; i++) {
-			for (int j = 0; j < other.getNCol(); j++) {
-				for (int k = 0; k < this._nCol; k++) {
-					ret.data[i][k].add(Complex.mul(this.data[i][j], other.data[j][k]));
+			for (int j = 0; j < other._nCol; j++) {
+				for (int k = 0; k < other._nRow; k++) {
+					ret.data[i][j].add(Complex.mul(this.data[i][k], other.data[k][j]));
 				}
 			}
 		}
