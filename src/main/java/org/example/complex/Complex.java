@@ -37,14 +37,14 @@ public class Complex {
 	}
 
 	/**
-	 * @return new double real part of the Complex Number
+	 * @return new double - real part of the Complex Number
 	 */
 	public double getReal() {
 		return this._real;
 	}
 
 	/**
-	 * @return new double imaginary part of the Complex number
+	 * @return new double - imaginary part of the Complex number
 	 */
 	public double getImag() {
 		return this._imag;
@@ -54,7 +54,7 @@ public class Complex {
 	 * Assignment addition operation equals `this += other`
 	 *
 	 * @param other Complex
-	 * @return `this` + `other`
+	 * @return this Complex
 	 */
 	public Complex add(Complex other) {
 		Complex._add(this, other);
@@ -71,7 +71,7 @@ public class Complex {
 	 *
 	 * @param lhs Complex
 	 * @param rhs Complex
-	 * @return new Complex `ret` = `lhs` + `rhs`
+	 * @return new Complex
 	 */
 	public static Complex add(Complex lhs, Complex rhs) {
 		var ret = new Complex(lhs);
@@ -84,7 +84,7 @@ public class Complex {
 	 * Assignment subtraction operation equals `this -= other`
 	 *
 	 * @param other Complex
-	 * @return this - other
+	 * @return this Complex
 	 */
 	public Complex sub(Complex other) {
 		Complex._sub(this, other);
@@ -102,7 +102,7 @@ public class Complex {
 	 *
 	 * @param lhs Complex
 	 * @param rhs Complex
-	 * @return new Complex `ret` = `lhs` - `rhs`
+	 * @return new Complex
 	 */
 	public static Complex sub(Complex lhs, Complex rhs) {
 		var ret = new Complex(lhs);
@@ -114,7 +114,7 @@ public class Complex {
 	 * Assignment multiplication operation equals `this *= other`
 	 *
 	 * @param other Complex
-	 * @return `this` * `other`
+	 * @return this Complex
 	 */
 	public Complex mul(Complex other) {
 		Complex._mul(this, other);
@@ -134,7 +134,7 @@ public class Complex {
 	 *
 	 * @param lhs Complex
 	 * @param rhs Complex
-	 * @return new Complex `ret` = `lhs` * `rhs`
+	 * @return new Complex
 	 */
 	public static Complex mul(Complex lhs, Complex rhs) {
 		var ret = new Complex(lhs);
@@ -146,7 +146,7 @@ public class Complex {
 	 * Assignment division operation equals `this /= other`
 	 *
 	 * @param other Complex
-	 * @return `this` / `other`
+	 * @return this Complex
 	 */
 	public Complex div(Complex other) {
 		Complex._div(this, other);
@@ -167,7 +167,7 @@ public class Complex {
 	 *
 	 * @param lhs Complex
 	 * @param rhs Complex
-	 * @return new Complex `ret` = `lhs` / `rhs`
+	 * @return new Complex
 	 */
 	public static Complex div(Complex lhs, Complex rhs) {
 		var ret = new Complex(lhs);
