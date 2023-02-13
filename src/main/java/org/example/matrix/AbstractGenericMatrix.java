@@ -46,7 +46,7 @@ public abstract class AbstractGenericMatrix<T>
 	 *         otherwise return false
 	 */
 	private boolean isInBounds(int i, int j) {
-		if (i < 0 || i > this._nRow || j < 0 || j > this._nCol) {
+		if (i < 0 || i >= this._nRow || j < 0 || j >= this._nCol) {
 			return false;
 		}
 		return true;
