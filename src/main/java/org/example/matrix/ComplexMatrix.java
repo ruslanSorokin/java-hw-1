@@ -49,6 +49,7 @@ public class ComplexMatrix
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
 
 		var ret = new ComplexMatrix(this._nRow, this._nCol);
+
 		for (int i = 0; i < this._nRow; ++i) {
 			for (int j = 0; j < this._nCol; ++j) {
 				ret.data[i][j] = Complex.add(this.data[i][j], other.data[i][j]);
@@ -69,6 +70,7 @@ public class ComplexMatrix
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
 
 		var ret = new ComplexMatrix(this._nRow, this._nCol);
+
 		for (int i = 0; i < this._nRow; ++i) {
 			for (int j = 0; j < this._nCol; ++j) {
 				ret.data[i][j] = Complex.sub(this.data[i][j], other.data[i][j]);
@@ -88,7 +90,8 @@ public class ComplexMatrix
 			throws InternalIncompatibleDimensionsException {
 		AbstractMatrix.checkInternalCompatibility(this, other);
 
-		var ret = new ComplexMatrix(this._nRow, this._nCol);
+		var ret = new ComplexMatrix(this._nRow, other._nCol);
+
 		for (int i = 0; i < this._nRow; i++) {
 			for (int j = 0; j < other.getNCol(); j++) {
 				for (int k = 0; k < this._nCol; k++) {
