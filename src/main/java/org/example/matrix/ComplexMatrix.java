@@ -16,6 +16,7 @@ public class ComplexMatrix
 			throws NegativeDimensionException {
 		super(nRow, nCol);
 		this.data = new Complex[this._nRow][this._nCol];
+		this.fill(new Complex(0, 0));
 	}
 
 	/*
