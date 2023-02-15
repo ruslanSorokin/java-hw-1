@@ -179,6 +179,20 @@ public class Complex {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (obj.getClass() != this.getClass()) {
+			return false;
+		}
+
+		var other = (Complex) obj;
+		return (this._imag == other._imag && this._real == other._real);
+	}
+
+	@Override
 	public String toString() {
 		return String.format("%.2f", this._real) + " + (" + String.format("%.2f", this._imag) + "i)";
 	}
