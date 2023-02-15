@@ -160,7 +160,7 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	/*
 	 * Returns new matrix in a triangle form
 	 */
-	public FloatMatrix triangleForm() {
+	protected FloatMatrix triangleForm() {
 		var ret = new FloatMatrix(this);
 
 		for (int i = 0; i < this._nRow; ++i) {
@@ -183,7 +183,7 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 * @throws NonSquareMatrix if matrix is not square-like
 	 */
 	@Override
-	public Double getDeterminant() {
+	public Double getDeterminant() throws NonSquareMatrix {
 		AbstractMatrix.checkSquareness(this);
 		var triangleForm = this.triangleForm();
 

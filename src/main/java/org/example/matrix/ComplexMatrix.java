@@ -152,7 +152,7 @@ public class ComplexMatrix
 	/*
 	 * Returns new matrix in a triangle form
 	 */
-	public ComplexMatrix triangleForm() {
+	protected ComplexMatrix triangleForm() {
 		var ret = new ComplexMatrix(this);
 
 		for (int i = 0; i < this._nRow; ++i) {
@@ -175,7 +175,7 @@ public class ComplexMatrix
 	 * @throws NonSquareMatrix if matrix is not square-like
 	 */
 	@Override
-	public Complex getDeterminant() {
+	public Complex getDeterminant() throws NonSquareMatrix {
 		AbstractMatrix.checkSquareness(this);
 		var triangleForm = this.triangleForm();
 

@@ -160,7 +160,7 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	/*
 	 * Returns new matrix in a triangle form
 	 */
-	public IntegerMatrix triangleForm() {
+	protected IntegerMatrix triangleForm() {
 		var ret = new IntegerMatrix(this);
 
 		for (int i = 0; i < this._nRow; ++i) {
@@ -183,7 +183,7 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 * @throws NonSquareMatrix if matrix is not square-like
 	 */
 	@Override
-	public Long getDeterminant() {
+	public Long getDeterminant() throws NonSquareMatrix {
 		AbstractMatrix.checkSquareness(this);
 		var triangleForm = this.triangleForm();
 
