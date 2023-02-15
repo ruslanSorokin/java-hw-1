@@ -194,6 +194,6 @@ public class Complex {
 
 	@Override
 	public String toString() {
-		return String.format("%.2f", this._real) + " + (" + String.format("%.2f", this._imag) + "i)";
+		return String.format("(%.2f", this._real) + " + " + String.format("%.2f", this._imag) + "i)";
 	}
 }
