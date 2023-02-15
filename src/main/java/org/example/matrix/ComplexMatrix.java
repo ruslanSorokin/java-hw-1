@@ -132,6 +132,7 @@ public class ComplexMatrix
 	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
 	 *                                                 compatible
 	 */
+	@Override
 	public AbstractGenericMatrix<Complex> mul(
 			AbstractGenericMatrix<Complex> lhs,
 			AbstractGenericMatrix<Complex> rhs)

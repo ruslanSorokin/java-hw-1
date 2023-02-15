@@ -140,6 +140,7 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
 	 *                                                 compatible
 	 */
+	@Override
 	public AbstractGenericMatrix<Double> mul(
 			AbstractGenericMatrix<Double> lhs,
 			AbstractGenericMatrix<Double> rhs)

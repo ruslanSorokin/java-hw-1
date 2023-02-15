@@ -140,6 +140,7 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
 	 *                                                 compatible
 	 */
+	@Override
 	public AbstractGenericMatrix<Long> mul(
 			AbstractGenericMatrix<Long> lhs,
 			AbstractGenericMatrix<Long> rhs)
