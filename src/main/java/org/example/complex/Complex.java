@@ -51,128 +51,131 @@ public class Complex {
 	}
 
 	/**
-	 * Assignment addition operation equals `this += other`
+	 * Assignment addition operation equals: `this += other`
 	 *
 	 * @param other Complex
 	 * @return this Complex
+	 */
+	public Complex addeq(Complex other) {
+		return Complex._add(this, other);
+	}
+
+	/**
+	 * Addition operation equals: `this + other`
+	 *
+	 * @param other Complex
+	 * @return new Complex
 	 */
 	public Complex add(Complex other) {
-		Complex._add(this, other);
-		return this;
+		return Complex._add(new Complex(this), other);
 	}
 
-	private static void _add(Complex lhs, Complex rhs) {
-		lhs._real += rhs._real;
-		lhs._imag += rhs._imag;
-	}
-
-	/**
-	 * Addition operation equals `lhs` + `rhs`
-	 *
-	 * @param lhs Complex
-	 * @param rhs Complex
-	 * @return new Complex
+	/*
+	 * Modifies `res` and returns it back
 	 */
-	public static Complex add(Complex lhs, Complex rhs) {
-		var ret = new Complex(lhs);
-		Complex._add(ret, rhs);
-		return ret;
+	private static Complex _add(Complex res, Complex other) {
+		res._real += other._real;
+		res._imag += other._imag;
+
+		return res;
 	}
 
 	/**
 	 *
-	 * Assignment subtraction operation equals `this -= other`
+	 * Assignment subtraction operation equals: `this -= other`
 	 *
 	 * @param other Complex
 	 * @return this Complex
+	 */
+	public Complex subeq(Complex other) {
+		return Complex._sub(this, other);
+	}
+
+	/**
+	 * Subtraction operation equals: `this - other`
+	 *
+	 * @param other Complex
+	 * @return new Complex
 	 */
 	public Complex sub(Complex other) {
-		Complex._sub(this, other);
-		return this;
+		return Complex._sub(new Complex(this), other);
 	}
 
-	private static void _sub(Complex lhs, Complex rhs) {
-		lhs._real -= rhs._real;
-		lhs._imag -= rhs._imag;
-	}
-
-	/**
-	 *
-	 * Subtraction operation equals `lhs` - `rhs`
-	 *
-	 * @param lhs Complex
-	 * @param rhs Complex
-	 * @return new Complex
+	/*
+	 * Modifies `res` and returns it back
 	 */
-	public static Complex sub(Complex lhs, Complex rhs) {
-		var ret = new Complex(lhs);
-		Complex._sub(ret, rhs);
-		return ret;
+	private static Complex _sub(Complex res, Complex other) {
+		res._real -= other._real;
+		res._imag -= other._imag;
+
+		return res;
 	}
 
 	/**
-	 * Assignment multiplication operation equals `this *= other`
+	 * Assignment multiplication operation equals: `this *= other`
 	 *
 	 * @param other Complex
 	 * @return this Complex
+	 */
+	public Complex muleq(Complex other) {
+		return Complex._mul(this, other);
+	}
+
+	/**
+	 * Multiplication operation equals: `this * other`
+	 *
+	 * @param other Complex
+	 * @return new Complex
 	 */
 	public Complex mul(Complex other) {
-		Complex._mul(this, other);
-		return this;
+		return Complex._mul(new Complex(this), other);
 	}
 
-	private static void _mul(Complex lhs, Complex rhs) {
-		var real = lhs._real * rhs._real - lhs._imag * rhs._imag;
-		var imag = lhs._real * rhs._imag + lhs._imag * rhs._real;
-
-		lhs._real = real;
-		lhs._imag = imag;
-	}
-
-	/**
-	 * Multiplication operation equals `lhs` * `rhs`
-	 *
-	 * @param lhs Complex
-	 * @param rhs Complex
-	 * @return new Complex
+	/*
+	 * Modifies `res` and returns it back
 	 */
-	public static Complex mul(Complex lhs, Complex rhs) {
-		var ret = new Complex(lhs);
-		Complex._mul(ret, rhs);
-		return ret;
+	private static Complex _mul(Complex res, Complex other) {
+		var real = res._real * other._real - res._imag * other._imag;
+		var imag = res._real * other._imag + res._imag * other._real;
+
+		res._real = real;
+		res._imag = imag;
+
+		return res;
 	}
 
 	/**
-	 * Assignment division operation equals `this /= other`
+	 * Assignment division operation equals: `this /= other`
 	 *
 	 * @param other Complex
 	 * @return this Complex
 	 */
-	public Complex div(Complex other) {
-		Complex._div(this, other);
-		return this;
-	}
-
-	private static void _div(Complex lhs, Complex rhs) {
-		var sqrtSum = rhs._real * rhs._real + rhs._imag * rhs._imag;
-		var real = (lhs._real * rhs._real + lhs._imag * rhs._imag) / sqrtSum;
-		var imag = (lhs._imag * rhs._real + lhs._real * rhs._imag) / sqrtSum;
-
-		lhs._real = real;
-		lhs._imag = imag;
+	public Complex diveq(Complex other) {
+		return Complex._div(this, other);
 	}
 
 	/**
-	 * Division operation equals `lhs` / `rhs`
+	 * Division operation equals `this / other`
 	 *
-	 * @param lhs Complex
-	 * @param rhs Complex
+	 * @param other Complex
 	 * @return new Complex
 	 */
-	public static Complex div(Complex lhs, Complex rhs) {
-		var ret = new Complex(lhs);
-		Complex._div(ret, rhs);
-		return ret;
+	public Complex div(Complex other) {
+		return Complex._div(new Complex(this), other);
+	}
+
+	/*
+	 * Modifies `res` and returns it back
+	 */
+	private static Complex _div(Complex res, Complex other) {
+		var sqrtSum = other._real * other._real + other._imag * other._imag;
+		var real = (res._real * other._real + res._imag * other._imag) / sqrtSum;
+		var imag = (res._imag * other._real + res._real * other._imag) / sqrtSum;
+
+		res._real = real;
+		res._imag = imag;
+
+		return res;
 	}
 
 	@Override

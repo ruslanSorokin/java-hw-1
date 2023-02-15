@@ -74,7 +74,7 @@ public class ComplexMatrix
 			AbstractGenericMatrix<Complex> rhs) {
 		for (int i = 0; i < lhs._nRow; ++i) {
 			for (int j = 0; j < lhs._nCol; ++j) {
-				lhs.data[i][j] = Complex.add(lhs.data[i][j], rhs.data[i][j]);
+				lhs.data[i][j].addeq(rhs.data[i][j]);
 			}
 		}
 		return lhs;
@@ -116,7 +116,7 @@ public class ComplexMatrix
 			AbstractGenericMatrix<Complex> rhs) {
 		for (int i = 0; i < lhs._nRow; ++i) {
 			for (int j = 0; j < lhs._nCol; ++j) {
-				lhs.data[i][j] = Complex.sub(lhs.data[i][j], rhs.data[i][j]);
+				lhs.data[i][j].subeq(rhs.data[i][j]);
 			}
 		}
 		return lhs;
@@ -140,7 +140,7 @@ public class ComplexMatrix
 		for (int i = 0; i < lhs._nRow; i++) {
 			for (int j = 0; j < rhs._nCol; j++) {
 				for (int k = 0; k < rhs._nRow; k++) {
-					res.data[i][j].add(Complex.mul(lhs.data[i][k], rhs.data[k][j]));
+					res.data[i][j].addeq(lhs.data[i][k].mul(rhs.data[k][j]));
 				}
 			}
 		}
