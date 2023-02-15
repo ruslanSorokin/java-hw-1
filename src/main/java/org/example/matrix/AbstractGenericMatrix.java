@@ -143,6 +143,16 @@ public abstract class AbstractGenericMatrix<T>
 			AbstractGenericMatrix<T> rhs)
 			throws InternalIncompatibleDimensionsException;
 
+	protected abstract AbstractGenericMatrix<T> triangleForm();
+
+	/**
+	 * Determinant
+	 *
+	 * @return new Complex
+	 * @throws NonSquareMatrix if matrix is not square-like
+	 */
+	protected abstract T getDeterminant();
+
 	/**
 	 * @return String
 	 */

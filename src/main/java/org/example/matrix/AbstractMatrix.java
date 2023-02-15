@@ -2,6 +2,7 @@ package org.example.matrix;
 
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
+import org.example.matrix.exception.NonSquareMatrix;
 import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 
 public abstract class AbstractMatrix {
@@ -45,6 +46,17 @@ public abstract class AbstractMatrix {
 			throws InternalIncompatibleDimensionsException {
 		if (lhs._nCol != rhs.getNRow()) {
 			throw new InternalIncompatibleDimensionsException(lhs, rhs);
+		}
+	}
+
+	/**
+	 * @param matrix nRow x nCol matrix
+	 * @throws NonSquareMatrix if nRow != nCol
+	 */
+	protected static void checkSquareness(AbstractMatrix matrix)
+			throws NonSquareMatrix {
+		if (matrix._nRow != matrix._nCol) {
+			throw new NonSquareMatrix(matrix);
 		}
 	}
 

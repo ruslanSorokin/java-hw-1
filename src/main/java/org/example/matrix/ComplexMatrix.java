@@ -3,6 +3,7 @@ package org.example.matrix;
 import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
+import org.example.matrix.exception.NonSquareMatrix;
 import org.example.complex.Complex;
 
 public class ComplexMatrix
@@ -147,4 +148,40 @@ public class ComplexMatrix
 		return res;
 	}
 
+	/*
+	 * Returns new matrix in a triangle form
+	 */
+	public ComplexMatrix triangleForm() {
+		var ret = new ComplexMatrix(this);
+
+		for (int i = 0; i < this._nRow; ++i) {
+			for (int j = i + 1; j < this._nRow; ++j) {
+
+				var tmp = ret.data[j][i].div(ret.data[i][i]);
+				for (int k = 0; k < this._nRow; ++k) {
+					ret.data[j][k].subeq(ret.data[i][k].mul(tmp));
+				}
+			}
+		}
+
+		return ret;
+	}
+
+	/**
+	 * Determinant
+	 *
+	 * @return new Complex
+	 * @throws NonSquareMatrix if matrix is not square-like
+	 */
+	@Override
+	public Complex getDeterminant() {
+		AbstractMatrix.checkSquareness(this);
+		var triangleForm = this.triangleForm();
+
+		var ret = new Complex(1, 0);
+		for (int i = 0; i < this._nRow; ++i) {
+			ret.muleq(triangleForm.data[i][i]);
+		}
+		return ret;
+	}
 }
