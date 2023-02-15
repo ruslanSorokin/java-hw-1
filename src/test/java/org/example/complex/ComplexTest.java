@@ -59,11 +59,11 @@ public class ComplexTest {
 		var rhs_backup = new Complex(rhs);
 		var res = new Complex(0, 40000);
 
-		Assertions.assertEquals(lhs.mul(rhs), res); // lhs - rhs == res
+		Assertions.assertEquals(lhs.mul(rhs), res); // lhs * rhs == res
 		Assertions.assertEquals(lhs, lhs_backup); // lhs == lhs_backup
 		Assertions.assertEquals(rhs, rhs_backup); // rhs == rhs_backup
 
-		Assertions.assertEquals(lhs.muleq(rhs), res); // lhs -= rhs == res
+		Assertions.assertEquals(lhs.muleq(rhs), res); // lhs *= rhs == res
 		Assertions.assertEquals(lhs, res); // lhs == res
 		Assertions.assertNotEquals(lhs, lhs_backup); // lhs != lhs_backup
 	}
