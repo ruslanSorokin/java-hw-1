@@ -56,16 +56,37 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 *                                                 compatible
 	 */
 	@Override
+	public AbstractGenericMatrix<Double> addeq(AbstractGenericMatrix<Double> other)
+			throws PairwiseIncompatibleDimensionsException {
+		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		return this._add(this, other);
+	}
+
+	/**
+	 * Addition operation equals `this + other`
+	 *
+	 * @param other matrix which will be added to `this` matrix
+	 * @return new matrix
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
+	@Override
 	public AbstractGenericMatrix<Double> add(AbstractGenericMatrix<Double> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		var res = new FloatMatrix(this);
+		return this._add(res, other);
+	}
 
-		for (int i = 0; i < this._nRow; ++i) {
-			for (int j = 0; j < this._nCol; ++j) {
-				this.data[i][j] = this.data[i][j] + other.data[i][j];
+	private AbstractGenericMatrix<Double> _add(
+			AbstractGenericMatrix<Double> lhs,
+			AbstractGenericMatrix<Double> rhs) {
+		for (int i = 0; i < lhs._nRow; ++i) {
+			for (int j = 0; j < lhs._nCol; ++j) {
+				lhs.data[i][j] = lhs.data[i][j] + rhs.data[i][j];
 			}
 		}
-		return this;
+		return lhs;
 	}
 
 	/**
@@ -77,15 +98,38 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 *                                                 compatible
 	 */
 	@Override
+	public AbstractGenericMatrix<Double> subeq(AbstractGenericMatrix<Double> other)
+			throws PairwiseIncompatibleDimensionsException {
+		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		return this._sub(this, other);
+	}
+
+	/**
+	 * Subtraction operation equals `this - other`
+	 *
+	 * @param other matrix which will be subtracted from this matrix
+	 * @return new matrix
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
+	@Override
 	public AbstractGenericMatrix<Double> sub(AbstractGenericMatrix<Double> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
-		for (int i = 0; i < this._nRow; ++i) {
-			for (int j = 0; j < this._nCol; ++j) {
-				this.data[i][j] = this.data[i][j] - other.data[i][j];
+		var res = new FloatMatrix(this);
+		return this._sub(res, other);
+	}
+
+	private AbstractGenericMatrix<Double> _sub(
+			AbstractGenericMatrix<Double> lhs,
+			AbstractGenericMatrix<Double> rhs) {
+		for (int i = 0; i < lhs._nRow; ++i) {
+			for (int j = 0; j < lhs._nCol; ++j) {
+				lhs.data[i][j] = lhs.data[i][j] - rhs.data[i][j];
 			}
 		}
-		return this;
+		return lhs;
+
 	}
 
 	/**
@@ -102,15 +146,6 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 			throws InternalIncompatibleDimensionsException {
 		AbstractMatrix.checkInternalCompatibility(lhs, rhs);
 		var res = new FloatMatrix(lhs._nRow, rhs._nCol);
-		return _mul(lhs, rhs, res);
-	}
-
-	private static AbstractGenericMatrix<Double> _mul(
-			AbstractGenericMatrix<Double> lhs,
-			AbstractGenericMatrix<Double> rhs,
-			AbstractGenericMatrix<Double> res)
-			throws InternalIncompatibleDimensionsException {
-
 		for (int i = 0; i < lhs._nRow; i++) {
 			for (int j = 0; j < rhs._nCol; j++) {
 				for (int k = 0; k < rhs._nRow; k++) {

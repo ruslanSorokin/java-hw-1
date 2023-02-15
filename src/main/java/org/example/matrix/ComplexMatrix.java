@@ -47,16 +47,37 @@ public class ComplexMatrix
 	 *                                                 compatible
 	 */
 	@Override
+	public AbstractGenericMatrix<Complex> addeq(AbstractGenericMatrix<Complex> other)
+			throws PairwiseIncompatibleDimensionsException {
+		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		return this._add(this, other);
+	}
+
+	/**
+	 * Addition operation equals `this + other`
+	 *
+	 * @param other matrix which will be added to `this` matrix
+	 * @return new matrix
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
+	@Override
 	public AbstractGenericMatrix<Complex> add(AbstractGenericMatrix<Complex> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		var res = new ComplexMatrix(this);
+		return this._add(res, other);
+	}
 
-		for (int i = 0; i < this._nRow; ++i) {
-			for (int j = 0; j < this._nCol; ++j) {
-				this.data[i][j] = Complex.add(this.data[i][j], other.data[i][j]);
+	private AbstractGenericMatrix<Complex> _add(
+			AbstractGenericMatrix<Complex> lhs,
+			AbstractGenericMatrix<Complex> rhs) {
+		for (int i = 0; i < lhs._nRow; ++i) {
+			for (int j = 0; j < lhs._nCol; ++j) {
+				lhs.data[i][j] = Complex.add(lhs.data[i][j], rhs.data[i][j]);
 			}
 		}
-		return this;
+		return lhs;
 	}
 
 	/**
@@ -68,16 +89,38 @@ public class ComplexMatrix
 	 *                                                 compatible
 	 */
 	@Override
+	public AbstractGenericMatrix<Complex> subeq(AbstractGenericMatrix<Complex> other)
+			throws PairwiseIncompatibleDimensionsException {
+		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		return this._sub(this, other);
+	}
+
+	/**
+	 * Subtraction operation equals `this - other`
+	 *
+	 * @param other matrix which will be subtracted from this matrix
+	 * @return new matrix
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
+	@Override
 	public AbstractGenericMatrix<Complex> sub(AbstractGenericMatrix<Complex> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		var res = new ComplexMatrix(this);
+		return this._sub(res, other);
+	}
 
-		for (int i = 0; i < this._nRow; ++i) {
-			for (int j = 0; j < this._nCol; ++j) {
-				this.data[i][j] = Complex.sub(this.data[i][j], other.data[i][j]);
+	private AbstractGenericMatrix<Complex> _sub(
+			AbstractGenericMatrix<Complex> lhs,
+			AbstractGenericMatrix<Complex> rhs) {
+		for (int i = 0; i < lhs._nRow; ++i) {
+			for (int j = 0; j < lhs._nCol; ++j) {
+				lhs.data[i][j] = Complex.sub(lhs.data[i][j], rhs.data[i][j]);
 			}
 		}
-		return this;
+		return lhs;
+
 	}
 
 	/**
@@ -94,15 +137,6 @@ public class ComplexMatrix
 			throws InternalIncompatibleDimensionsException {
 		AbstractMatrix.checkInternalCompatibility(lhs, rhs);
 		var res = new ComplexMatrix(lhs._nRow, rhs._nCol);
-		return _mul(lhs, rhs, res);
-	}
-
-	private static AbstractGenericMatrix<Complex> _mul(
-			AbstractGenericMatrix<Complex> lhs,
-			AbstractGenericMatrix<Complex> rhs,
-			AbstractGenericMatrix<Complex> res)
-			throws InternalIncompatibleDimensionsException {
-
 		for (int i = 0; i < lhs._nRow; i++) {
 			for (int j = 0; j < rhs._nCol; j++) {
 				for (int k = 0; k < rhs._nRow; k++) {

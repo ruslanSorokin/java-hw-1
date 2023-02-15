@@ -56,16 +56,37 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 *                                                 compatible
 	 */
 	@Override
+	public AbstractGenericMatrix<Long> addeq(AbstractGenericMatrix<Long> other)
+			throws PairwiseIncompatibleDimensionsException {
+		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		return this._add(this, other);
+	}
+
+	/**
+	 * Addition operation equals `this + other`
+	 *
+	 * @param other matrix which will be added to `this` matrix
+	 * @return new matrix
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
+	@Override
 	public AbstractGenericMatrix<Long> add(AbstractGenericMatrix<Long> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		var res = new IntegerMatrix(this);
+		return this._add(res, other);
+	}
 
-		for (int i = 0; i < this._nRow; ++i) {
-			for (int j = 0; j < this._nCol; ++j) {
-				this.data[i][j] = this.data[i][j] + other.data[i][j];
+	private AbstractGenericMatrix<Long> _add(
+			AbstractGenericMatrix<Long> lhs,
+			AbstractGenericMatrix<Long> rhs) {
+		for (int i = 0; i < lhs._nRow; ++i) {
+			for (int j = 0; j < lhs._nCol; ++j) {
+				lhs.data[i][j] = lhs.data[i][j] + rhs.data[i][j];
 			}
 		}
-		return this;
+		return lhs;
 	}
 
 	/**
@@ -77,16 +98,38 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 *                                                 compatible
 	 */
 	@Override
+	public AbstractGenericMatrix<Long> subeq(AbstractGenericMatrix<Long> other)
+			throws PairwiseIncompatibleDimensionsException {
+		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		return this._sub(this, other);
+	}
+
+	/**
+	 * Subtraction operation equals `this - other`
+	 *
+	 * @param other matrix which will be subtracted from this matrix
+	 * @return new matrix
+	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
+	 *                                                 compatible
+	 */
+	@Override
 	public AbstractGenericMatrix<Long> sub(AbstractGenericMatrix<Long> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
+		var res = new IntegerMatrix(this);
+		return this._sub(res, other);
+	}
 
-		for (int i = 0; i < this._nRow; ++i) {
-			for (int j = 0; j < this._nCol; ++j) {
-				this.data[i][j] = this.data[i][j] - other.data[i][j];
+	private AbstractGenericMatrix<Long> _sub(
+			AbstractGenericMatrix<Long> lhs,
+			AbstractGenericMatrix<Long> rhs) {
+		for (int i = 0; i < lhs._nRow; ++i) {
+			for (int j = 0; j < lhs._nCol; ++j) {
+				lhs.data[i][j] = lhs.data[i][j] - rhs.data[i][j];
 			}
 		}
-		return this;
+		return lhs;
+
 	}
 
 	/**
@@ -97,21 +140,12 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 * @throws InternalIncompatibleDimensionsException if matrices are not internal
 	 *                                                 compatible
 	 */
-	public static AbstractGenericMatrix<Long> mul(
+	public AbstractGenericMatrix<Long> mul(
 			AbstractGenericMatrix<Long> lhs,
 			AbstractGenericMatrix<Long> rhs)
 			throws InternalIncompatibleDimensionsException {
 		AbstractMatrix.checkInternalCompatibility(lhs, rhs);
 		var res = new IntegerMatrix(lhs._nRow, rhs._nCol);
-		return _mul(lhs, rhs, res);
-	}
-
-	private static AbstractGenericMatrix<Long> _mul(
-			AbstractGenericMatrix<Long> lhs,
-			AbstractGenericMatrix<Long> rhs,
-			AbstractGenericMatrix<Long> res)
-			throws InternalIncompatibleDimensionsException {
-
 		for (int i = 0; i < lhs._nRow; i++) {
 			for (int j = 0; j < rhs._nCol; j++) {
 				for (int k = 0; k < rhs._nRow; k++) {
