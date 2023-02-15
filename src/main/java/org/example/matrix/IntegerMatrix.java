@@ -8,6 +8,14 @@ import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 
 	/*
+	 * Constructs a new IntegerMatrix with size of the `source` array
+	 */
+	public IntegerMatrix(Long[][] source) {
+		super(source.length, source[0].length);
+		this.data = source.clone();
+	}
+
+	/*
 	 * Constructs a new IntegerMatrix with size `nRow` x `nCol`
 	 * throws NegativeDimensionException if any of dimension is negative
 	 */

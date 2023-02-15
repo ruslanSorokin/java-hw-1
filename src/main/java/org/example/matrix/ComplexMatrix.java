@@ -4,10 +4,19 @@ import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
 import org.example.matrix.exception.NonSquareMatrix;
+
 import org.example.complex.Complex;
 
 public class ComplexMatrix
 		extends AbstractGenericMatrix<Complex> {
+
+	/*
+	 * Constructs a new ComplexMatrix with size `nRow` x `nCol`
+	 */
+	public ComplexMatrix(Complex[][] source) {
+		super(source.length, source[0].length);
+		this.data = source.clone();
+	}
 
 	/*
 	 * Constructs a new ComplexMatrix with size `nRow` x `nCol`
