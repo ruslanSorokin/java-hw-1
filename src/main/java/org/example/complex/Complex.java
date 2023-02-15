@@ -194,6 +194,26 @@ public class Complex {
 
 	@Override
 	public String toString() {
-		return String.format("(%.2f", this._real) + " + " + String.format("%.2f", this._imag) + "i)";
+		return String.format("(%.2f + %.2fi)", this._real, this._imag);
+	}
+
+	/**
+	 * Phase
+	 *
+	 * @return new double
+	 */
+	public double getPhase() {
+		return Math.atan2(this._imag, this._real);
+	}
+
+	/**
+	 * Trigonometric form
+	 *
+	 * @return new String
+	 */
+	public String getTrigonometric() {
+		var rad = Math.sqrt(Math.sqrt(this._real) + Math.sqrt(this._imag));
+		var pi = Math.toDegrees(this.getPhase());
+		return String.format("%.2f cos(%.2f) + i * sin(%.2f)", rad, pi, pi);
 	}
 }
