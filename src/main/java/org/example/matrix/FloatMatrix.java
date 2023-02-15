@@ -13,9 +13,7 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 */
 	public FloatMatrix(int nRow, int nCol)
 			throws NegativeDimensionException {
-		super(nRow, nCol);
-		this.data = new Double[this._nRow][this._nCol];
-		this.fill(0d);
+		this(nRow, nCol, 0d);
 	}
 
 	/*
@@ -25,7 +23,8 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 */
 	public FloatMatrix(int nRow, int nCol, Double val)
 			throws NegativeDimensionException {
-		this(nRow, nCol);
+		super(nRow, nCol);
+		this.data = new Double[this._nRow][this._nCol];
 		this.fill(val);
 	}
 
@@ -36,7 +35,8 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 */
 	public FloatMatrix(int nRow, int nCol, Float val)
 			throws NegativeDimensionException {
-		this(nRow, nCol);
+		super(nRow, nCol);
+		this.data = new Double[this._nRow][this._nCol];
 		this.fill(Double.valueOf(val));
 	}
 

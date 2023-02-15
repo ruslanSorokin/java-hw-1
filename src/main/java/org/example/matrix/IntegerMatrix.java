@@ -13,9 +13,7 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 */
 	public IntegerMatrix(int nRow, int nCol)
 			throws NegativeDimensionException {
-		super(nRow, nCol);
-		this.data = new Long[this._nRow][this._nCol];
-		this.fill(0l);
+		this(nRow, nCol, 0l);
 	}
 
 	/*
@@ -25,7 +23,8 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 */
 	public IntegerMatrix(int nRow, int nCol, Long val)
 			throws NegativeDimensionException {
-		this(nRow, nCol);
+		super(nRow, nCol);
+		this.data = new Long[this._nRow][this._nCol];
 		this.fill(val);
 	}
 
@@ -36,7 +35,8 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 */
 	public IntegerMatrix(int nRow, int nCol, Integer val)
 			throws NegativeDimensionException {
-		this(nRow, nCol);
+		super(nRow, nCol);
+		this.data = new Long[this._nRow][this._nCol];
 		this.fill(Long.valueOf(val));
 	}
 
