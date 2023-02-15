@@ -2,6 +2,7 @@ package org.example.matrix;
 
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
+import org.example.matrix.exception.NonSquareMatrix;
 import org.example.matrix.exception.PairwiseIncompatibleDimensionsException;
 
 public class IntegerMatrix extends AbstractGenericMatrix<Long> {
@@ -155,6 +156,32 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 			}
 		}
 		return res;
+	}
+
+	/**
+	 * Assignment transpose operation
+	 *
+	 * @return this matrix
+	 * @throws NonSquareMatrix if matrix is not square-like
+	 */
+	@Override
+	public AbstractGenericMatrix<Long> transposeeq()
+			throws NonSquareMatrix {
+		AbstractMatrix.checkSquareness(this);
+		return this._transpose(this);
+	}
+
+	/**
+	 * Transpose operation
+	 *
+	 * @return new matrix
+	 * @throws NonSquareMatrix if matrix is not square-like
+	 */
+	@Override
+	public AbstractGenericMatrix<Long> transpose()
+			throws NonSquareMatrix {
+		AbstractMatrix.checkSquareness(this);
+		return this._transpose(new IntegerMatrix(this));
 	}
 
 	/*

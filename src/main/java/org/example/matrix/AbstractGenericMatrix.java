@@ -100,6 +100,14 @@ public abstract class AbstractGenericMatrix<T>
 		this.data[i][j] = val;
 	}
 
+	protected AbstractGenericMatrix<T> _transpose(AbstractGenericMatrix<T> res) {
+		for (int i = 0; i < this._nCol; i++)
+			for (int j = 0; j < this._nRow; j++)
+				res.data[j][i] = this.data[i][j];
+
+		return res;
+	}
+
 	/**
 	 * @return this matrix
 	 * @throws PairwiseIncompatibleDimensionsException if matrices are not pairwise
@@ -142,6 +150,10 @@ public abstract class AbstractGenericMatrix<T>
 			AbstractGenericMatrix<T> lhs,
 			AbstractGenericMatrix<T> rhs)
 			throws InternalIncompatibleDimensionsException;
+
+	protected abstract AbstractGenericMatrix<T> transpose();
+
+	protected abstract AbstractGenericMatrix<T> transposeeq();
 
 	protected abstract AbstractGenericMatrix<T> triangleForm();
 

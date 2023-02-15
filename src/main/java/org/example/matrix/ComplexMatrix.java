@@ -149,6 +149,32 @@ public class ComplexMatrix
 		return res;
 	}
 
+	/**
+	 * Assignment transpose operation
+	 *
+	 * @return this matrix
+	 * @throws NonSquareMatrix if matrix is not square-like
+	 */
+	@Override
+	public AbstractGenericMatrix<Complex> transposeeq()
+			throws NonSquareMatrix {
+		AbstractMatrix.checkSquareness(this);
+		return this._transpose(this);
+	}
+
+	/**
+	 * Transpose operation
+	 *
+	 * @return new matrix
+	 * @throws NonSquareMatrix if matrix is not square-like
+	 */
+	@Override
+	public AbstractGenericMatrix<Complex> transpose()
+			throws NonSquareMatrix {
+		AbstractMatrix.checkSquareness(this);
+		return this._transpose(new ComplexMatrix(this));
+	}
+
 	/*
 	 * Returns new matrix in a triangle form
 	 */
