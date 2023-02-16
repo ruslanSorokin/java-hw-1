@@ -11,8 +11,7 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 * Constructs a new IntegerMatrix with size of the `source` array
 	 */
 	public IntegerMatrix(Long[][] source) {
-		super(source.length, source[0].length);
-		this.data = source.clone();
+		super(source);
 	}
 
 	/*

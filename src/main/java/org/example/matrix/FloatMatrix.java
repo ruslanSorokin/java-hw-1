@@ -11,8 +11,7 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 * Constructs a new FloatMatrix with size of the `source` array
 	 */
 	public FloatMatrix(Double[][] source) {
-		super(source.length, source[0].length);
-		this.data = source.clone();
+		super(source);
 	}
 
 	/*

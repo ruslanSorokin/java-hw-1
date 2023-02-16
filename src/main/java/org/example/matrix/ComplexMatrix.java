@@ -14,8 +14,7 @@ public class ComplexMatrix
 	 * Constructs a new ComplexMatrix with size of the `source` array
 	 */
 	public ComplexMatrix(Complex[][] source) {
-		super(source.length, source[0].length);
-		this.data = source.clone();
+		super(source);
 	}
 
 	/*
