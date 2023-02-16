@@ -147,8 +147,7 @@ public abstract class AbstractGenericMatrix<T>
 	 *                                                 compatible
 	 */
 	public abstract AbstractGenericMatrix<T> mul(
-			AbstractGenericMatrix<T> lhs,
-			AbstractGenericMatrix<T> rhs)
+			AbstractGenericMatrix<T> other)
 			throws InternalIncompatibleDimensionsException;
 
 	protected abstract AbstractGenericMatrix<T> transpose();

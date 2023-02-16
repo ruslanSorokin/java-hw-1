@@ -155,15 +155,14 @@ public class ComplexMatrix
 	 */
 	@Override
 	public AbstractGenericMatrix<Complex> mul(
-			AbstractGenericMatrix<Complex> lhs,
-			AbstractGenericMatrix<Complex> rhs)
+			AbstractGenericMatrix<Complex> other)
 			throws InternalIncompatibleDimensionsException {
-		AbstractMatrix.checkInternalCompatibility(lhs, rhs);
-		var res = new ComplexMatrix(lhs._nRow, rhs._nCol);
-		for (int i = 0; i < lhs._nRow; i++) {
-			for (int j = 0; j < rhs._nCol; j++) {
-				for (int k = 0; k < rhs._nRow; k++) {
-					res.data[i][j] = res.data[i][j].add(lhs.data[i][k].mul(rhs.data[k][j]));
+		AbstractMatrix.checkInternalCompatibility(this, other);
+		var res = new ComplexMatrix(this._nRow, other._nCol, new Complex(0));
+		for (int i = 0; i < res._nRow; i++) {
+			for (int j = 0; j < res._nCol; j++) {
+				for (int k = 0; k < this._nCol; k++) {
+					res.data[i][j] = res.data[i][j].add(this.data[i][k].mul(other.data[k][j]));
 				}
 			}
 		}

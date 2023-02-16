@@ -153,15 +153,14 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 */
 	@Override
 	public AbstractGenericMatrix<Double> mul(
-			AbstractGenericMatrix<Double> lhs,
-			AbstractGenericMatrix<Double> rhs)
+			AbstractGenericMatrix<Double> other)
 			throws InternalIncompatibleDimensionsException {
-		AbstractMatrix.checkInternalCompatibility(lhs, rhs);
-		var res = new FloatMatrix(lhs._nRow, rhs._nCol);
-		for (int i = 0; i < lhs._nRow; i++) {
-			for (int j = 0; j < rhs._nCol; j++) {
-				for (int k = 0; k < rhs._nRow; k++) {
-					res.data[i][j] += lhs.data[i][k] * rhs.data[k][j];
+		AbstractMatrix.checkInternalCompatibility(this, other);
+		var res = new FloatMatrix(this._nRow, other._nCol);
+		for (int i = 0; i < res._nRow; i++) {
+			for (int j = 0; j < res._nCol; j++) {
+				for (int k = 0; k < this._nCol; k++) {
+					res.data[i][j] += this.data[i][k] * other.data[k][j];
 				}
 			}
 		}
