@@ -45,8 +45,21 @@ public class ComplexMatrix
 	 * Constructs a new ComplexMatrix with size `nRow` x `nCol`
 	 */
 	public ComplexMatrix(ComplexMatrix other) {
-		this(other._nRow, other._nCol);
-		this.copy(other, this);
+		super(other._nRow, other._nCol);
+		this.data = new Complex[this._nRow][this._nCol];
+		copy(other, this);
+	}
+
+	/**
+	 * @param src matrix from which elements will be copied
+	 * @param dst matrix into which elements will be copied
+	 */
+	protected void copy(ComplexMatrix src, ComplexMatrix dst) {
+		for (int i = 0; i < dst._nRow; ++i) {
+			for (int j = 0; j < dst._nCol; ++j) {
+				dst.data[i][j] = new Complex(src.data[i][j]);
+			}
+		}
 	}
 
 	/**
@@ -61,7 +74,7 @@ public class ComplexMatrix
 	public AbstractGenericMatrix<Complex> addeq(AbstractGenericMatrix<Complex> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
-		return this._add(this, other);
+		return _add(this, other);
 	}
 
 	/**
@@ -76,8 +89,7 @@ public class ComplexMatrix
 	public AbstractGenericMatrix<Complex> add(AbstractGenericMatrix<Complex> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
-		var res = new ComplexMatrix(this);
-		return this._add(res, other);
+		return _add(new ComplexMatrix(this), other);
 	}
 
 	private AbstractGenericMatrix<Complex> _add(
@@ -85,7 +97,7 @@ public class ComplexMatrix
 			AbstractGenericMatrix<Complex> rhs) {
 		for (int i = 0; i < lhs._nRow; ++i) {
 			for (int j = 0; j < lhs._nCol; ++j) {
-				lhs.data[i][j].addeq(rhs.data[i][j]);
+				lhs.data[i][j] = lhs.data[i][j].add(rhs.data[i][j]);
 			}
 		}
 		return lhs;
@@ -103,7 +115,7 @@ public class ComplexMatrix
 	public AbstractGenericMatrix<Complex> subeq(AbstractGenericMatrix<Complex> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
-		return this._sub(this, other);
+		return _sub(this, other);
 	}
 
 	/**
@@ -118,8 +130,7 @@ public class ComplexMatrix
 	public AbstractGenericMatrix<Complex> sub(AbstractGenericMatrix<Complex> other)
 			throws PairwiseIncompatibleDimensionsException {
 		AbstractMatrix.checkPairwiseCompatibility(this, other);
-		var res = new ComplexMatrix(this);
-		return this._sub(res, other);
+		return _sub(new ComplexMatrix(this), other);
 	}
 
 	private AbstractGenericMatrix<Complex> _sub(
@@ -127,7 +138,7 @@ public class ComplexMatrix
 			AbstractGenericMatrix<Complex> rhs) {
 		for (int i = 0; i < lhs._nRow; ++i) {
 			for (int j = 0; j < lhs._nCol; ++j) {
-				lhs.data[i][j].subeq(rhs.data[i][j]);
+				lhs.data[i][j] = lhs.data[i][j].sub(rhs.data[i][j]);
 			}
 		}
 		return lhs;
@@ -152,7 +163,7 @@ public class ComplexMatrix
 		for (int i = 0; i < lhs._nRow; i++) {
 			for (int j = 0; j < rhs._nCol; j++) {
 				for (int k = 0; k < rhs._nRow; k++) {
-					res.data[i][j].addeq(lhs.data[i][k].mul(rhs.data[k][j]));
+					res.data[i][j] = res.data[i][j].add(lhs.data[i][k].mul(rhs.data[k][j]));
 				}
 			}
 		}
@@ -169,7 +180,7 @@ public class ComplexMatrix
 	public AbstractGenericMatrix<Complex> transposeeq()
 			throws NonSquareMatrix {
 		AbstractMatrix.checkSquareness(this);
-		return this._transpose(this);
+		return _transpose(this);
 	}
 
 	/**
@@ -182,7 +193,7 @@ public class ComplexMatrix
 	public AbstractGenericMatrix<Complex> transpose()
 			throws NonSquareMatrix {
 		AbstractMatrix.checkSquareness(this);
-		return this._transpose(new ComplexMatrix(this));
+		return _transpose(new ComplexMatrix(this));
 	}
 
 	/*
@@ -196,7 +207,7 @@ public class ComplexMatrix
 
 				var tmp = ret.data[j][i].div(ret.data[i][i]);
 				for (int k = 0; k < this._nRow; ++k) {
-					ret.data[j][k].subeq(ret.data[i][k].mul(tmp));
+					ret.data[j][k] = ret.data[j][k].sub(ret.data[i][k].mul(tmp));
 				}
 			}
 		}
