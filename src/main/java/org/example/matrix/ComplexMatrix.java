@@ -5,6 +5,8 @@ import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
 import org.example.matrix.exception.NonSquareMatrix;
 
+import java.util.Arrays;
+
 import org.example.complex.Complex;
 
 public class ComplexMatrix
@@ -14,7 +16,8 @@ public class ComplexMatrix
 	 * Constructs a new ComplexMatrix with size of the `source` array
 	 */
 	public ComplexMatrix(Complex[][] source) {
-		super(source);
+		super(source.length, source[0].length);
+		this.data = Arrays.copyOf(source, source.length);
 	}
 
 	/*

@@ -1,5 +1,7 @@
 package org.example.matrix;
 
+import java.util.Arrays;
+
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
 import org.example.matrix.exception.NonSquareMatrix;
@@ -11,7 +13,8 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 	 * Constructs a new FloatMatrix with size of the `source` array
 	 */
 	public FloatMatrix(Double[][] source) {
-		super(source);
+		super(source.length, source[0].length);
+		this.data = Arrays.copyOf(source, source.length);
 	}
 
 	/*

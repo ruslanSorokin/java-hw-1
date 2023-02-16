@@ -1,5 +1,7 @@
 package org.example.matrix;
 
+import java.util.Arrays;
+
 import org.example.matrix.exception.InternalIncompatibleDimensionsException;
 import org.example.matrix.exception.NegativeDimensionException;
 import org.example.matrix.exception.NonSquareMatrix;
@@ -11,7 +13,8 @@ public class IntegerMatrix extends AbstractGenericMatrix<Long> {
 	 * Constructs a new IntegerMatrix with size of the `source` array
 	 */
 	public IntegerMatrix(Long[][] source) {
-		super(source);
+		super(source.length, source[0].length);
+		this.data = Arrays.copyOf(source, source.length);
 	}
 
 	/*

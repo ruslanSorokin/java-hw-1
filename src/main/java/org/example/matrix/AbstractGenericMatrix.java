@@ -11,14 +11,6 @@ public abstract class AbstractGenericMatrix<T>
 	 */
 	public T[][] data = null;
 
-	/*
-	 * Constructs a new Matrix with size of the `source` array
-	 */
-	protected AbstractGenericMatrix(T[][] source) {
-		super(source.length, source[0].length);
-		this.data = source.clone();
-	}
-
 	protected AbstractGenericMatrix(int nRow, int nCol)
 			throws NegativeDimensionException {
 		super(nRow, nCol);
