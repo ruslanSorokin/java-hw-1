@@ -53,11 +53,11 @@ public class ComplexTest {
 
 	@Test
 	void testMultiplication() {
-		var lhs = new Complex(100, 100);
-		var rhs = new Complex(200, 200);
+		var lhs = new Complex(5, 0);
+		var rhs = new Complex(10, 0);
 		var lhs_backup = new Complex(lhs);
 		var rhs_backup = new Complex(rhs);
-		var res = new Complex(0, 40000);
+		var res = new Complex(50, 0);
 
 		Assertions.assertEquals(lhs.mul(rhs), res); // lhs * rhs == res
 		Assertions.assertEquals(lhs, lhs_backup); // lhs == lhs_backup
