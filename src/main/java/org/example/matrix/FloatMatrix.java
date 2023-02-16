@@ -228,4 +228,18 @@ public class FloatMatrix extends AbstractGenericMatrix<Double> {
 		return ret;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (obj.getClass() != this.getClass()) {
+			return false;
+		}
+
+		var other = (FloatMatrix) obj;
+		return (Arrays.deepEquals(this.data, other.data));
+	}
+
 }
