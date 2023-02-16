@@ -11,7 +11,7 @@ public class ComplexMatrix
 		extends AbstractGenericMatrix<Complex> {
 
 	/*
-	 * Constructs a new ComplexMatrix with size `nRow` x `nCol`
+	 * Constructs a new ComplexMatrix with size of the `source` array
 	 */
 	public ComplexMatrix(Complex[][] source) {
 		super(source.length, source[0].length);
